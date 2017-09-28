@@ -1,3 +1,13 @@
+LOOK AT MODULE.EXPORTS
+
+
+
+
+
+
+
+
+
 // included node package
 const http = require('http');
 
@@ -16,12 +26,11 @@ server.listen(port, hostname, () => {
 });
 
 /*
-
-JSON.stringify(req.headers)  // to explore
-
-JSON.stringify(Object.keys(req))  // to explore
+JSON.stringify(req.headers)  // call this to explore
+JSON.stringify(Object.keys(req))  // call this to explore
 
 No way to access *body* of req in vanilla node?
 Post request headers w/ key/value pairs show up, though.
-
 */
+
+// file system -- TO DO
