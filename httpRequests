@@ -1,0 +1,47 @@
+General facts
+
+- All get requests put data on url.
+- All post requests (by default) put data in body.
+
+- Can use both bodyparsers at once!
+- bodyparser url encoded *extended* allows encoding arrays and objects as values. Use {extended: true} to parse those. 
+
+=============
+HTML form
+
+  POST: url encoded, key/val pairs will end up on body. 
+    Access in express with bodyparserURLencoded (as a JS object).
+    If you grab it yourself w/ chunks, you get string.
+    Example: name=Scout&breed=Husky
+  GET: url encoded, key/val pairs will be appended to url. 
+    (NOT on body.)
+    Access in express with req.query
+
+=============
+jQuery ajax DEFAULT behavior
+
+  POST: url encoded, key/val pairs will end up on body. 
+    Access in express with body-parserURLencoded (as a JS object).
+    If you grab it yourself w/ chunks, you get string.
+    Example: name=Scout&breed=Husky
+    Don't stringify yourself beforehand!
+  GET: url encoded, key/val pairs will be appended to url.
+    (NOT on body.)
+    Access in express with req.query
+
+  - ContentType is what kind of data you're SENDING (you provide the data in that form - ajax won't convert for you)
+  - By default, makes content-type 'application/x-www-form-urlencoded'.
+  - DataType is what kind of data you're expecting BACK
+
+=============
+axios
+
+  GET: url encoded, key/val pairs will be appended to url.
+    (NOT on body.)
+    Access in express with req.query
+    *** Ignores data you try to send along, unless you add params object with keys / vals!!
+  POST: Default is application/json, appended to body.
+    Access with bodyParserJSON as a JS object.
+
+  axios is usable on client AND server!
+  It's promise-based.
