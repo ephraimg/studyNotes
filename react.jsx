@@ -44,12 +44,12 @@ var App = () => (
   <div>
     <h2>My Todo List</h2>
     <TodoList todos={['Learn React', 'Crush Recast.ly', 'Maybe sleep']}/> 
-              // Here we are creating an instance of the `TodoList` component
+          {/* Here we are creating an instance of the `TodoList` component */}
   </div>
 );
 
 
-// Handling events in a stateless functional components 
+// Handling events in stateless functional components 
 // which are great when all you need to do is receive props and render JSX.
 var TodoList = (props) => {
     // This function will be called when the first `<li>` below is clicked on
@@ -58,7 +58,7 @@ var TodoList = (props) => {
   var onListItemClick = (event) => {
     console.log('I got clicked');
   };
-    // Because we used curly braces with this arrow function
+    // Because we used curly braces with TodoList's arrow function
     // we have to write an explicit `return` statement
   return (
     <ul>
@@ -73,13 +73,13 @@ var App = () => (
   <div>
     <h2>My Todo List</h2>
     <TodoList todos={['Learn React', 'Crush Recast.ly', 'Maybe sleep']}/> 
-      // Here we are creating an instance of the `TodoList` component
+          {/* Here we are creating an instance of the `TodoList` component */}
   </div>
 );
 
 
 // To make applications interactive, components need to store data that 
-// cannot be explicitly passed in as props and re-render this data changes. 
+// cannot be explicitly passed in as props and re-render as data changes. 
 // React makes this possible with class components.
 
 // A class component can be defined as an ES6 class
@@ -148,6 +148,40 @@ class TodoListItem extends React.Component {
     );
   }
 }
+
+
+// If events in one component need to change another component,
+// change the state in the smallest parent to both components.
+// Do that via a function passed down from the parent.
+
+class ParentComp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { status: false };
+    this.changeStatus = this.changeStatus.bind(this);
+      // needed to keep this-binding when passed to child
+  }
+  changeStatus() {
+    this.setState({ status: !this.state.status });
+  }
+  render() {
+    return (
+      <div>
+        <ChildCompOne status={this.state.status} />
+        <ChildCompTwo changeStatus={this.changeStatus} />
+      </div>
+    )
+  }
+}
+
+const ChildCompOne = props => (
+  <p> The current status is: {props.status.toString()} </p>
+)
+
+const ChildCompTwo = props => (
+  <p onClick={props.changeStatus}> To change status, click me! </p>
+)
+
 
 
 // At end of component's file, you can export:
